@@ -34,6 +34,7 @@ This project is a chatbot that allows you to upload PDF documents and ask questi
 ```bash
 git clone https://github.com/yourusername/chatbot-pdf.git
 cd chatbot-pdf
+```
 
 ![Screenshot (2135)](https://github.com/user-attachments/assets/f67c7123-6d35-4ad6-9468-b03bfb373094)
 
