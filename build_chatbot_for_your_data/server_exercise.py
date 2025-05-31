@@ -1,3 +1,5 @@
+# This .py file contains the original code derived from the original IBM Cognitive AI Platform exercise
+
 import logging
 import os
 from flask import Flask, render_template, request, jsonify
