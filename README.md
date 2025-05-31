@@ -36,6 +36,124 @@ git clone https://github.com/yourusername/chatbot-pdf.git
 cd chatbot-pdf
 ```
 
+
+2. Create a virtual environment
+bash
+python -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+.venv\Scripts\activate     # Windows
+3. Install dependencies
+bash
+pip install flask flask-cors langchain chromadb sentence-transformers ctransformers py-cpuinfo
+4. Download the TinyLlama model
+bash
+# Create models directory
+mkdir models
+
+# Download TinyLlama (Windows PowerShell)
+curl -Uri "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf" `
+     -OutFile "models\tinyllama.gguf"
+5. Project Structure
+chatbot-pdf/
+├── models/                          # Directory for LLM models
+│   └── tinyllama.gguf               # TinyLlama model file
+├── build_chatbot_for_your_data/     # Project code
+│   ├── static/
+│   │   ├── css/
+│   │   │   └── style.css            # CSS styles
+│   │   └── js/
+│   │       └── script.js            # Frontend JavaScript
+│   ├── templates/
+│   │   └── index.html               # HTML template
+│   ├── server.py                    # Flask server
+│   └── worker.py                    # LLM and document processing
+├── .gitignore
+├── README.md
+└── requirements.txt                 # Python dependencies
+6. Run the Application
+bash
+python build_chatbot_for_your_data/server.py
+Open your web browser and visit: http://localhost:8000
+
+Usage Guide
+Start Chatting: The chatbot will greet you and ask for a PDF upload
+
+Upload PDF: Click "Upload File" and select a PDF document
+
+Ask Questions: Type your questions in the input field
+
+Reset Chat: Use the refresh button to start a new conversation
+
+Toggle Theme: Switch between light/dark mode using the toggle
+
+Customization Options
+Using Different Models
+Download any GGUF format model from TheBloke's Hugging Face
+
+Place it in the models/ directory
+
+Update worker.py with the new model path and type:
+
+python
+# For Mistral model
+llm = AutoModelForCausalLM.from_pretrained(
+    "models/mistral-7b.Q4_K_M.gguf",
+    model_type="mistral",
+    max_new_tokens=1024,
+    temperature=0.1
+)
+
+# For Llama2 model
+llm = AutoModelForCausalLM.from_pretrained(
+    "models/llama-2-7b.Q4_K_M.gguf",
+    model_type="llama",
+    max_new_tokens=1024,
+    temperature=0.1
+)
+Performance Tuning
+Adjust these parameters in worker.py for better performance:
+
+python
+llm = AutoModelForCausalLM.from_pretrained(
+    model_path,
+    model_type="llama",
+    max_new_tokens=1024,      # Increase for longer responses
+    temperature=0.3,          # Increase for more creative responses
+    context_length=4096,      # Increase for larger documents
+    gpu_layers=40,            # Enable if you have NVIDIA GPU
+    threads=8                 # Use more CPU cores
+)
+Troubleshooting
+Common Issues
+Model not found:
+
+Verify model is in models/ directory
+
+Check filename in worker.py
+
+Slow responses:
+
+Reduce max_new_tokens
+
+Use smaller model
+
+Add gpu_layers=40 if you have NVIDIA GPU
+
+Memory errors:
+
+Reduce chunk_size in process_document()
+
+Use smaller model
+
+Close other memory-intensive applications
+
+Error Messages
+"Please upload a PDF document first!": Upload a document before asking questions
+
+"File not uploaded correctly": Try a different PDF file
+
+"Error processing document": The PDF might be corrupted or encrypted
+
 ![Screenshot (2135)](https://github.com/user-attachments/assets/f67c7123-6d35-4ad6-9468-b03bfb373094)
 
 ![Screenshot (2136)](https://github.com/user-attachments/assets/36bd5927-bedc-44b5-982a-9cad26139755)
