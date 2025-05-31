@@ -29,31 +29,35 @@ This project is a chatbot that allows you to upload PDF documents and ask questi
 
 ## Setup Instructions
 
-### 1. Clone the repository
-
+1. Clone the repository
 ```bash
 git clone https://github.com/yourusername/chatbot-pdf.git
 cd chatbot-pdf
 ```
 
-
 2. Create a virtual environment
-bash
+```bash
 python -m venv .venv
-source .venv/bin/activate  # Linux/Mac
-.venv\Scripts\activate     # Windows
+source .venv/bin/activate (# Linux/Mac) or .venv\Scripts\activate (# Windows)
+```
+
 3. Install dependencies
-bash
+```bash
 pip install flask flask-cors langchain chromadb sentence-transformers ctransformers py-cpuinfo
+```
+
 4. Download the TinyLlama model
-bash
+```bash
 # Create models directory
 mkdir models
 
 # Download TinyLlama (Windows PowerShell)
 curl -Uri "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf" `
      -OutFile "models\tinyllama.gguf"
+```
+
 5. Project Structure
+<pre>
 chatbot-pdf/
 ├── models/                          # Directory for LLM models
 │   └── tinyllama.gguf               # TinyLlama model file
@@ -70,31 +74,29 @@ chatbot-pdf/
 ├── .gitignore
 ├── README.md
 └── requirements.txt                 # Python dependencies
+</pre>
+
 6. Run the Application
-bash
+```bash
 python build_chatbot_for_your_data/server.py
-Open your web browser and visit: http://localhost:8000
+```
+Open your web browser and visit: `http://localhost:8000`
 
-Usage Guide
-Start Chatting: The chatbot will greet you and ask for a PDF upload
 
-Upload PDF: Click "Upload File" and select a PDF document
+## Usage Guide
+1. Start Chatting: The chatbot will greet you and ask for a PDF upload
+2. Upload PDF: Click "Upload File" and select a PDF document
+3. Ask Questions: Type your questions in the input field
+4.Reset Chat: Use the refresh button to start a new conversation
+5. Toggle Theme: Switch between light/dark mode using the toggle
 
-Ask Questions: Type your questions in the input field
+## Customization Options
+### Using Different Models
+1. Download any GGUF format model from TheBloke's Hugging Face
+2. Place it in the `models/` directory
+3. Update `worker.py` with the new model path and type:
 
-Reset Chat: Use the refresh button to start a new conversation
-
-Toggle Theme: Switch between light/dark mode using the toggle
-
-Customization Options
-Using Different Models
-Download any GGUF format model from TheBloke's Hugging Face
-
-Place it in the models/ directory
-
-Update worker.py with the new model path and type:
-
-python
+```python
 # For Mistral model
 llm = AutoModelForCausalLM.from_pretrained(
     "models/mistral-7b.Q4_K_M.gguf",
@@ -110,10 +112,12 @@ llm = AutoModelForCausalLM.from_pretrained(
     max_new_tokens=1024,
     temperature=0.1
 )
-Performance Tuning
-Adjust these parameters in worker.py for better performance:
+```
 
-python
+### Performance Tuning
+Adjust these parameters in `worker.py` for better performance:
+
+```python
 llm = AutoModelForCausalLM.from_pretrained(
     model_path,
     model_type="llama",
@@ -123,36 +127,28 @@ llm = AutoModelForCausalLM.from_pretrained(
     gpu_layers=40,            # Enable if you have NVIDIA GPU
     threads=8                 # Use more CPU cores
 )
-Troubleshooting
-Common Issues
-Model not found:
+```
 
-Verify model is in models/ directory
+## Troubleshooting
+### Common Issues
+1. Model not found:
+- Verify model is in `models/` directory
+- Check filename in `worker.py`
 
-Check filename in worker.py
+2. Slow responses:
+- Reduce `max_new_tokens`
+- Use smaller model
+- Add `gpu_layers=40` if you have NVIDIA GPU
 
-Slow responses:
+3. Memory errors:
+- Reduce `chunk_size` in `process_document()`
+- Use smaller model
+- Close other memory-intensive applications
 
-Reduce max_new_tokens
-
-Use smaller model
-
-Add gpu_layers=40 if you have NVIDIA GPU
-
-Memory errors:
-
-Reduce chunk_size in process_document()
-
-Use smaller model
-
-Close other memory-intensive applications
-
-Error Messages
-"Please upload a PDF document first!": Upload a document before asking questions
-
-"File not uploaded correctly": Try a different PDF file
-
-"Error processing document": The PDF might be corrupted or encrypted
+### Error Messages
+- "Please upload a PDF document first!": Upload a document before asking questions
+- "File not uploaded correctly": Try a different PDF file
+- "Error processing document": The PDF might be corrupted or encrypted
 
 ![Screenshot (2135)](https://github.com/user-attachments/assets/f67c7123-6d35-4ad6-9468-b03bfb373094)
 
