@@ -221,6 +221,7 @@ llm = AutoModelForCausalLM.from_pretrained(
 - **"File not uploaded correctly"**: Try a different PDF file
 - **"Error processing document"**: The PDF might be corrupted or encrypted
 
+## 📸 Screenshots
 ![Screenshot (2135)](https://github.com/user-attachments/assets/f67c7123-6d35-4ad6-9468-b03bfb373094)
 
 ![Screenshot (2136)](https://github.com/user-attachments/assets/36bd5927-bedc-44b5-982a-9cad26139755)
