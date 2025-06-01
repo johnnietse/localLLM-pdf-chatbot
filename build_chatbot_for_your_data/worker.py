@@ -117,7 +117,7 @@ def process_prompt(prompt):
         return "Please upload a PDF document first!"
 
     # Simple retrieval
-    docs = vector_store.similarity_search(prompt, k=2)
+    docs = vector_store.similarity_search(prompt,   k=2)
     context = "\n".join([d.page_content for d in docs])
 
     # Create prompt with context

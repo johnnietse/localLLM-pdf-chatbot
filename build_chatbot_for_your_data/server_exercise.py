@@ -1,41 +1,70 @@
-# This .py file contains the original code derived from the original IBM Cognitive AI Platform exercise
-
 import logging
 import os
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
+from werkzeug.utils import secure_filename
 import worker  # Import the worker module
 
-# Initialize Flask app and CORS
+# Initialize Flask app
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 app.logger.setLevel(logging.ERROR)
 
+# Configuration
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'doc', 'docx'}
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Define the route for the index page
+
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')  # Render the index.html template
+    return render_template('index.html')
 
 
-# Define the route for processing messages
 @app.route('/process-message', methods=['POST'])
 def process_message_route():
+    data = request.get_json()
+    if not data or 'message' not in data:
+        return jsonify({'error': 'Missing message in request'}), 400
+
+    try:
+        user_message = data['message']
+        bot_response = worker.process_message(user_message)
+        return jsonify({'response': bot_response})
+    except Exception as e:
+        app.logger.error(f"Error processing message: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
 
 
-# TODO: Extract the user's message from the request
-# TODO: Process the user's message using the worker module
-# TODO: Return the bot's response as JSON
-
-# Define the route for processing documents
 @app.route('/process-document', methods=['POST'])
 def process_document_route():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+
+    if not allowed_file(file.filename):
+        return jsonify({'error': 'Unsupported file type'}), 415
+
+    try:
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
+
+        worker.process_document(file_path)
+        return jsonify({'message': 'Document processed and ready for queries'}), 200
+    except Exception as e:
+        app.logger.error(f"Document processing error: {str(e)}")
+        return jsonify({'error': 'Document processing failed'}), 500
 
 
-# TODO: Check if a file was uploaded  --> use if 'file' not in request file then return jsofify message and error code 400
-# TODO: Save the uploaded file --> extracte the file with request
-# TODO: Process the saved file --> create proper file_path for saving
-# TODO: Send a response indicating that the document is ready for queries --> retrun jsonify message with code 200
-
-# Run the Flask app (later you need to add "python main block" ==> if __name__ == "__main__":
-app.run(debug=True, port=8000, host='0.0.0.0')
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000, debug=False)  # Disable debug in production
