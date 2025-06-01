@@ -1,5 +1,18 @@
 # Local LLM PDF Chatbot
 
+## Web Framework
+![Flask](https://img.shields.io/badge/Flask-3.0.3-000000?logo=flask)
+![Flask-CORS](https://img.shields.io/badge/Flask_CORS-4.0.0-000000)
+
+## AI/ML Libraries
+![LangChain](https://img.shields.io/badge/LangChain-0.1.16-00A67E)
+![ChromaDB](https://img.shields.io/badge/ChromaDB-0.4.24-EF4784)
+![SentenceTransformers](https://img.shields.io/badge/SentenceTransformers-3.0.0-FF6B6B)
+![CTransformers](https://img.shields.io/badge/CTransformers-0.2.27-8A2BE2)
+
+## System Utilities
+![py-cpuinfo](https://img.shields.io/badge/py--cpuinfo-9.0.0-5D8AA8)
+
 This project is a chatbot that allows you to upload PDF documents and ask questions about their content. It uses a local Large Language Model (LLM) to generate responses, avoiding the need for expensive API keys.
 
 ## Features
