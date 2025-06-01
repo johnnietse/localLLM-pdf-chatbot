@@ -47,18 +47,22 @@ pip install flask flask-cors langchain chromadb sentence-transformers ctransform
 ```
 
 4. Download the TinyLlama model
+
+
 ```bash
+cd your_project_directory
+
 # Create models directory
 mkdir models
 
 # Download TinyLlama (Windows PowerShell)
+# by this
 curl -Uri "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf" `
      -OutFile "models\tinyllama.gguf"
+
+# or by this through running the PowerShell script file (download_models.ps1) to download the local LLM models into your project's directory
+.\download_models.ps1
 ```
-
-cd C:\Users\Johnnie\Downloads\testing_model_download_script
->> .\download_models.ps1
-
 5. Project Structure
 <pre>
 chatbot-pdf/
@@ -77,6 +81,36 @@ chatbot-pdf/
 ├── .gitignore
 ├── README.md
 └── requirements.txt                 # Python dependencies
+
+chatbot-pdf/
+│
+├── .venv/                          # Virtual environment (not included in repo)
+│
+├── build_chatbot_for_your_data/   # Main application folder
+│   ├── static/                    # Static files (JS, CSS)
+│   │   ├── script.js
+│   │   └── style.css
+│   │
+│   ├── templates/                 # HTML templates
+│   │   └── index.html
+│   │
+│   ├── .env                       # Environment variables (should be in .gitignore)
+│   ├── Dockerfile                 # Docker configuration
+│   ├── requirements.txt           # Python dependencies
+│   ├── server.py                  # Main server logic
+│   ├── server_exercise.py         # Possibly for testing or development
+│   └── worker.py                  # Background task processing
+│
+├── models/                        # Folder for ML or NLP models (currently empty)
+│
+├── .gitattributes                 # Git attributes config
+├── .gitignore                    # Files and folders to ignore in Git
+├── download_models.ps1           # PowerShell script to download models
+├── main.py                       # Entry point or script to run the chatbot
+│
+├── External Libraries/           # IDE-specific (PyCharm), not part of project
+└── Scratches and Consoles/       # IDE-specific (PyCharm), not part of project
+
 </pre>
 
 6. Run the Application
