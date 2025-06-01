@@ -31,8 +31,8 @@ This project is a chatbot that allows you to upload PDF documents and ask questi
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/chatbot-pdf.git
-cd chatbot-pdf
+git clone https://github.com/johnnietse/localLLM-pdf-chatbot.git
+cd localLLM-pdf-chatbot
 ```
 
 2. Create a virtual environment
