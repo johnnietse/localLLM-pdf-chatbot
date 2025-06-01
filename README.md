@@ -38,9 +38,15 @@ cd localLLM-pdf-chatbot
 2. Create a virtual environment
 ```bash
 python -m venv .venv
+```
+
 - For Linux/Mac:
+```bash
 source .venv/bin/activate
+```
+
 - For Windows:
+```bash
 .venv\Scripts\activate
 ```
 
