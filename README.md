@@ -72,7 +72,8 @@ pip install flask flask-cors langchain chromadb sentence-transformers ctransform
 
 
 ```bash
-cd your_project_directory
+# You can certainly change this to your project's directory, but if you clone this repository you would run this command: `cd build_chatbot_for_your_data`
+cd build_chatbot_for_your_data
 
 # Create models directory
 mkdir models
@@ -158,18 +159,29 @@ Open your web browser and visit: `http://localhost:8000`
 ```python
 # For Mistral model
 llm = AutoModelForCausalLM.from_pretrained(
-    "models/mistral-7b.Q4_K_M.gguf",
+    "../models/mistral-7b.Q4_K_M.gguf",
     model_type="mistral",
     max_new_tokens=1024,
     temperature=0.1
+    context_length=2048
 )
 
 # For Llama2 model
 llm = AutoModelForCausalLM.from_pretrained(
-    "models/llama-2-7b.Q4_K_M.gguf",
+    "../models/llama-2-7b.Q4_K_M.gguf",
     model_type="llama",
     max_new_tokens=1024,
     temperature=0.1
+    context_length=2048
+)
+
+# For tinyllama model
+llm = AutoModelForCausalLM.from_pretrained(
+    "../models/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf",
+    model_type="llama",
+    max_new_tokens=1024,
+    temperature=0.1
+    context_length=2048
 )
 ```
 
@@ -205,9 +217,9 @@ llm = AutoModelForCausalLM.from_pretrained(
 - Close other memory-intensive applications
 
 ### Error Messages
-- "Please upload a PDF document first!": Upload a document before asking questions
-- "File not uploaded correctly": Try a different PDF file
-- "Error processing document": The PDF might be corrupted or encrypted
+- **"Please upload a PDF document first!"**: Upload a document before asking questions
+- **"File not uploaded correctly"**: Try a different PDF file
+- **"Error processing document"**: The PDF might be corrupted or encrypted
 
 ![Screenshot (2135)](https://github.com/user-attachments/assets/f67c7123-6d35-4ad6-9468-b03bfb373094)
 
