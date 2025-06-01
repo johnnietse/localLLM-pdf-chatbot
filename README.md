@@ -56,6 +56,9 @@ curl -Uri "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve
      -OutFile "models\tinyllama.gguf"
 ```
 
+cd C:\Users\Johnnie\Downloads\testing_model_download_script
+>> .\download_models.ps1
+
 5. Project Structure
 <pre>
 chatbot-pdf/
