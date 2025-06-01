@@ -112,6 +112,7 @@ chatbot-pdf/
 │
 ├── .gitattributes                 # Git attributes config
 ├── .gitignore                    # Files and folders to ignore in Git
+├── README.md
 ├── download_models.ps1           # PowerShell script to download models
 │
 ├── External Libraries/           # IDE-specific (PyCharm), not part of project
