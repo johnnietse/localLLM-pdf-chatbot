@@ -67,6 +67,11 @@ source .venv/bin/activate
 ```bash
 pip install flask flask-cors langchain chromadb sentence-transformers ctransformers py-cpuinfo
 ```
+or by installing the required packages by
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
 
 4. Download the TinyLlama model
 
