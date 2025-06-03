@@ -6,3 +6,5 @@ models/
 *.gguf
 .venv/
 build_chatbot_for_your_data/.env
+__pycache__/
+

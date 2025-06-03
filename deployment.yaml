@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-assistant
+spec:
+  replicas: 1  # Only 1 replica due to GPU/memory constraints
+  selector:
+    matchLabels:
+      app: data-assistant
+  template:
+    metadata:
+      labels:
+        app: data-assistant
+    spec:
+      containers:
+      - name: main
+        image: your-registry/data-assistant:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: MODEL_PATH
+          value: /app/models/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf
+        resources:
+          limits:
+            memory: "4Gi"
+            cpu: "2"
+            # nvidia.com/gpu: 1  # Uncomment if using GPU nodes
+          requests:
+            memory: "3Gi"
+            cpu: "1.5"
+        volumeMounts:
+        - name: model-storage
+          mountPath: /app/models
+      volumes:
+      - name: model-storage
+        persistentVolumeClaim:
+          claimName: model-pvc
+
+
+
