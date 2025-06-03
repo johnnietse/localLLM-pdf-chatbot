@@ -95,20 +95,8 @@ curl -Uri "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve
 
 <pre>
 chatbot-pdf/
-│
-├── .idea/                         # Virtual environment (not included in repo)
-│   ├── inspectionProfiles
-│   │   ├── Project_Default.xml
-│   │   └── profiles_settings.xml
-│   ├── .gitignore
-│   ├── chatbot-pdf.iml
-│   ├── misc.xml 
-│   ├── modules.xml
-│   └── vcs.xml
 │         
 ├── build_chatbot_for_your_data/   # Main application folder
-│   ├── __pycache__
-│   │   └── worker.cpython-310.pyc
 │   ├── static/                    # Static files (JS, CSS)
 │   │   ├── script.js
 │   │   └── style.css
@@ -116,7 +104,6 @@ chatbot-pdf/
 │   ├── templates/                 # HTML templates
 │   │   └── index.html
 │   │
-│   ├── .env                       # Environment variables (should be in .gitignore)
 │   ├── Dockerfile                 # Docker configuration
 │   ├── requirements.txt           # Python dependencies
 │   ├── server.py                  # Main server logic (Flask server)
@@ -129,7 +116,10 @@ chatbot-pdf/
 ├── .gitignore                    # Files and folders to ignore in Git
 ├── LICENSE 
 ├── README.md
-└── download_models.ps1           # PowerShell script to download models
+├── deployment.yaml
+├── download_models.ps1           # PowerShell script to download models
+├── pvc.yaml
+└── service.yaml
 </pre>
 
 6. Run the Application
