@@ -96,9 +96,11 @@ curl -Uri "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve
 <pre>
 chatbot-pdf/
 │
-├── .venv/                          # Virtual environment (not included in repo)
+├── .idea/                         # Virtual environment (not included in repo)
 │
 ├── build_chatbot_for_your_data/   # Main application folder
+│   ├── __pycache__
+│   │   └── worker.cpython-310.pyc
 │   ├── static/                    # Static files (JS, CSS)
 │   │   ├── script.js
 │   │   └── style.css
@@ -117,11 +119,9 @@ chatbot-pdf/
 │
 ├── .gitattributes                 # Git attributes config
 ├── .gitignore                    # Files and folders to ignore in Git
+├── LICENSE 
 ├── README.md
-├── download_models.ps1           # PowerShell script to download models
-│
-├── External Libraries/           # IDE-specific (PyCharm), not part of project
-└── Scratches and Consoles/       # IDE-specific (PyCharm), not part of project
+└── download_models.ps1           # PowerShell script to download models
 </pre>
 
 6. Run the Application
