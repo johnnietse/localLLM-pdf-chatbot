@@ -97,7 +97,15 @@ curl -Uri "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve
 chatbot-pdf/
 │
 ├── .idea/                         # Virtual environment (not included in repo)
-│
+│   ├── inspectionProfiles
+│   │   ├── Project_Default.xml
+│   │   └── profiles_settings.xml
+│   ├── .gitignore
+│   ├── chatbot-pdf.iml
+│   ├── misc.xml 
+│   ├── modules.xml
+│   └── vcs.xml
+│         
 ├── build_chatbot_for_your_data/   # Main application folder
 │   ├── __pycache__
 │   │   └── worker.cpython-310.pyc
