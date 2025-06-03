@@ -97,29 +97,29 @@ curl -Uri "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve
 chatbot-pdf/
 │         
 ├── build_chatbot_for_your_data/   # Main application folder
-│   ├── static/                    # Static files (JS, CSS)
-│   │   ├── script.js
-│   │   └── style.css
+│   ├── static/                    # Frontend assets: Static files (JS, CSS)
+│   │   ├── script.js              # Client-side JavaScript (chat logic)
+│   │   └── style.css              # CSS styling
 │   │
 │   ├── templates/                 # HTML templates
-│   │   └── index.html
+│   │   └── index.html             # Main chat interface
 │   │
-│   ├── Dockerfile                 # Docker configuration
+│   ├── Dockerfile                 # Docker - Containerization config
 │   ├── requirements.txt           # Python dependencies
 │   ├── server.py                  # Main server logic (Flask server)
-│   ├── server_exercise.py         # For testing or development
+│   ├── server_exercise.py         # For testing or development - Development/test version
 │   └── worker.py                  # Background task processing, particularly LLM and document processing
 │
-├── models/                        # Folder/Directory for LLM models (currently empty)
+├── models/                        # Folder/Directory for local LLM models (currently empty)
 │
 ├── .gitattributes                 # Git attributes config
-├── .gitignore                    # Files and folders to ignore in Git
-├── LICENSE 
-├── README.md
-├── deployment.yaml
-├── download_models.ps1           # PowerShell script to download models
-├── pvc.yaml
-└── service.yaml
+├── .gitignore                     # Files and folders to ignore in Git
+├── LICENSE                        # Usage rights
+├── README.md                      # Project documentation
+├── deployment.yaml                # Kubernetes deployment config
+├── download_models.ps1            # PowerShell script to download models
+├── pvc.yaml                       # Kubernetes storage config
+└── service.yaml                   # Kubernetes service definition
 </pre>
 
 6. Run the Application
