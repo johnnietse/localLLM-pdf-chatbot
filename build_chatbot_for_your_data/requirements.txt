@@ -1,3 +1,36 @@
+# Flask
+# Flask_Cors
+# langchain
+# openai
+# pdf2image
+# tiktoken
+# chromadb
+# pypdf
+
+# Flask
+# Flask_Cors
+# langchain
+# openai
+# pdf2image
+# tiktoken
+# chromadb
+# pypdf
+# ctransformers==0.2.27  # Add this line
+
+
+# Flask
+# Flask_Cors
+# langchain
+# openai
+# pdf2image
+# tiktoken
+# chromadb
+# pypdf
+# ctransformers==0.2.27
+# langchain-community  # Add this
+# sentence-transformers  # Required for HuggingFaceEmbeddings
+
+
 Flask
 Flask_Cors
 langchain
@@ -6,3 +39,21 @@ pdf2image
 tiktoken
 chromadb
 pypdf
+ctransformers==0.2.27
+langchain-community
+sentence-transformers
+langchain-huggingface  # Add this new requirement
+
+
+Flask
+Flask_Cors
+langchain
+openai
+pdf2image
+tiktoken
+chromadb
+pypdf
+ctransformers==0.2.27
+langchain-community
+sentence-transformers
+langchain-huggingface>=0.0.2  # Add this

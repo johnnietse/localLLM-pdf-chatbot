@@ -77,16 +77,24 @@
 
 import os
 from ctransformers import AutoModelForCausalLM
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.document_loaders import PyPDFLoader
+# from langchain.embeddings import HuggingFaceEmbeddings
+# from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.vectorstores import Chroma
+# from langchain.vectorstores import Chroma
+
+# Replace these imports at the top of worker.py
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.vectorstores import Chroma
 
 # Initialize global variables
 vector_store = None
 llm = None
 llm_embeddings = None
-model_path = "../models/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf"
+# model_path = "../models/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf"
+
+# Change this line in worker.py
+model_path = "/app/models/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf"  # Absolute path in container
 
 
 def init_llm():
